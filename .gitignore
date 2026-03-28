@@ -1,0 +1,5 @@
+.idea
+app.og/*
+assets/*
+www/logs/*
+www/vendor/*

@@ -1,0 +1,227 @@
+openapi: 3.0.0
+info:
+  title: 'Airport API'
+  description: 'API documentation for Airport API'
+  version: 1.0.0
+paths:
+  '/api/airports/{id}':
+    get:
+      tags:
+        - Airports
+      summary: 'Get a single airport by database id'
+      operationId: 6a707056eae35f67464aa96b7cb5001c
+      parameters:
+        -
+          name: id
+          in: path
+          description: 'Database record id'
+          required: true
+          schema:
+            type: integer
+          example: '2'
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: 'Not Found'
+  '/api/airports/country/{country}':
+    get:
+      tags:
+        - Airports
+      summary: 'List all airports in any given country'
+      operationId: bc2ada04072cd542b61ed0470363149c
+      parameters:
+        -
+          name: country
+          in: path
+          description: 'Country name'
+          required: true
+          schema:
+            type: string
+          example: 'Sri Lanka'
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: 'Not Found'
+  '/api/distance/latitude/{latitude}/longitude/{longitude}/radius/{radius}/unit/{unit}':
+    get:
+      tags:
+        - Distance
+      summary: 'Get all airports within a specified radius of any latitude/longitude pair'
+      operationId: a99877f242487f577c0a36ff444874f5
+      parameters:
+        -
+          name: latitude
+          in: path
+          description: 'Latitude of location'
+          required: true
+          schema:
+            type: number
+          example: '42.156032'
+        -
+          name: longitude
+          in: path
+          description: 'Longitude of location'
+          required: true
+          schema:
+            type: number
+          example: '-83.6141056'
+        -
+          name: radius
+          in: path
+          description: 'Radius to search (int)'
+          required: true
+          schema:
+            type: integer
+          example: '500'
+        -
+          name: unit
+          in: path
+          description: 'Measurement units - use `M` for miles, `K` for kilometers, or `N` for nautical miles'
+          required: true
+          schema:
+            type: string
+          example: M
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: 'Not Found'
+  /api/airports:
+    get:
+      tags:
+        - Airports
+      summary: 'Get all airports'
+      operationId: 4e641d2c35049f4ee67a387a81dd4c8b
+      responses:
+        '200':
+          description: Success
+  '/api/distance/country/{country1_name}/country/{country2_name}/unit/{unit}':
+    get:
+      tags:
+        - Distance
+      summary: 'Get the closest airports to each other between any two countries'
+      operationId: 9f051316f71520cb9c7a05ae4b40a8a9
+      parameters:
+        -
+          name: country1_name
+          in: path
+          description: 'Name of 1st country'
+          required: true
+          schema:
+            type: string
+          example: 'Sri Lanka'
+        -
+          name: country2_name
+          in: path
+          description: 'Name of 2nd country'
+          required: true
+          schema:
+            type: string
+          example: Mexico
+        -
+          name: unit
+          in: path
+          description: 'Measurement units - use `M` for miles, `K` for kilometers, or `N` for nautical miles'
+          required: true
+          schema:
+            type: string
+          example: M
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: 'Not Found'
+        '422':
+          description: 'Unprocessable Entity'
+  '/api/distance/airport/{airport1_id}/airport/{airport2_id}/unit/{unit}':
+    get:
+      tags:
+        - Distance
+      summary: 'Get the distance between 2 airports by database record id'
+      operationId: 049a84133666c4c1ee103e3d201cfb5f
+      parameters:
+        -
+          name: airport1_id
+          in: path
+          description: 'Database record id for 1st airport'
+          required: true
+          schema:
+            type: integer
+          example: '2'
+        -
+          name: airport2_id
+          in: path
+          description: 'Database record id for 2nd airport'
+          required: true
+          schema:
+            type: integer
+          example: '300'
+        -
+          name: unit
+          in: path
+          description: 'Measurement units - use `M` for miles, `K` for kilometers, or `N` for nautical miles'
+          required: true
+          schema:
+            type: string
+          example: M
+      responses:
+        '200':
+          description: Success
+        '422':
+          description: 'Unprocessable Entity'
+  '/api/routefinder/airport/{airport1_id}/airport/{airport2_id}/range/{range}/unit/{unit}':
+    get:
+      tags:
+        - Route
+      summary: 'Find the shortest route between two airports with a specified maximum distance between legs'
+      operationId: d8118cc165af0df9951c61cbea2f8d5e
+      parameters:
+        -
+          name: airport1_id
+          in: path
+          description: 'Database record id for 1st airport'
+          required: true
+          schema:
+            type: integer
+          example: '3645'
+        -
+          name: airport2_id
+          in: path
+          description: 'Database record id for 2nd airport'
+          required: true
+          schema:
+            type: integer
+          example: '8905'
+        -
+          name: range
+          in: path
+          description: 'Maximum range of each segment'
+          required: true
+          schema:
+            type: integer
+          example: '500'
+        -
+          name: unit
+          in: path
+          description: 'Measurement units - use `M` for miles, `K` for kilometers, or `N` for nautical miles'
+          required: true
+          schema:
+            type: string
+          example: M
+      responses:
+        '200':
+          description: Success
+        '404':
+          description: 'Not Found'
+tags:
+  -
+    name: Airports
+    description: 'Airport information endpoints'
+  -
+    name: Distance
+    description: 'Distance measurement endpoints'
+  -
+    name: Route
+    description: 'Route planning endpoints'
