@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use Phinx\Migration\AbstractMigration;
 
-final class CreateAirportsApiTable extends AbstractMigration
+final class CreateAirportsTable extends AbstractMigration
 {
     /**
      * Change Method.
