@@ -97303,7 +97303,7 @@ class AirportsApiTableSeeder extends AbstractSeed
             ]
         ];
 
-        $airportTable = $this->table('airports_api');
+        $airportTable = $this->table('airports');
         $airportTable->insert($data)
             ->saveData();
     }

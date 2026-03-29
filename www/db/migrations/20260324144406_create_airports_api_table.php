@@ -19,7 +19,7 @@ final class CreateAirportsApiTable extends AbstractMigration
      */
     public function change(): void
     {
-        $table = $this->table('airports_api');
+        $table = $this->table('airports');
         $table->addColumn('airport_name', 'string', ['limit' => 50, 'null' => false])
             ->addColumn('city', 'string', ['limit' => 50, 'null' => false])
             ->addColumn('country', 'string', ['limit' => 50, 'null' => false])
